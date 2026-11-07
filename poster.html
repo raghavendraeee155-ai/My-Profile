@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raghavendra Pokuri | Controls Systems Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f4c5c;
+      --blue: #1b6b7a;
+      --electric: #8bc4b9;
+      --signal: #8bc4b9;
+      --paper: #f2f7f6;
+      --muted: #2f3e46;
+      --line: rgba(27, 107, 122, 0.2);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      min-height: 100%;
+      background: #2f3e46;
+      color: var(--ink);
+      font-family: "Space Grotesk", sans-serif;
+    }
+    body { display: flex; justify-content: center; padding: 32px 16px; }
+    .poster {
+      width: 760px;
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: 0 34px 110px rgba(0, 0, 0, 0.48);
+      position: relative;
+    }
+
+    .hero {
+      min-height: 348px;
+      position: relative;
+      overflow: hidden;
+      padding: 34px 48px 38px;
+      background: linear-gradient(135deg, #0f4c5c 0%, #1b6b7a 100%);
+      color: white;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.32;
+      background-image:
+        linear-gradient(rgba(139, 196, 185, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 196, 185, 0.2) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: linear-gradient(90deg, black 0%, transparent 86%);
+    }
+    .hero::after {
+      content: "PLC";
+      position: absolute;
+      right: -21px;
+      bottom: -46px;
+      color: transparent;
+      font: 700 188px/1 "Space Grotesk", sans-serif;
+      letter-spacing: -0.12em;
+      -webkit-text-stroke: 1px rgba(139, 196, 185, 0.28);
+    }
+    .wire {
+      position: absolute;
+      width: 270px;
+      height: 270px;
+      right: 58px;
+      top: 26px;
+      border: 1px solid rgba(139, 196, 185, 0.42);
+      border-radius: 50%;
+    }
+    .wire::before, .wire::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+    .wire::before {
+      width: 13px; height: 13px; top: 26px; left: 16px;
+      background: var(--electric); box-shadow: 0 0 0 7px rgba(139, 196, 185, 0.16);
+    }
+    .wire::after {
+      width: 11px; height: 11px; bottom: 32px; right: 8px;
+      background: var(--electric); box-shadow: 0 0 0 6px rgba(139, 196, 185, 0.17);
+    }
+    .circuit-lines {
+      position: absolute; z-index: 1; right: 0; bottom: 0;
+      width: 420px; height: 220px; opacity: 0.76; pointer-events: none;
+    }
+    .circuit-lines path { fill: none; stroke: rgba(139, 196, 185, 0.55); stroke-width: 1.2; }
+    .circuit-lines circle { fill: var(--electric); }
+    .hero-content { position: relative; z-index: 1; max-width: 575px; }
+    .eyebrow {
+      display: flex; align-items: center; gap: 9px;
+      color: var(--electric); font: 500 11px/1.2 "DM Mono", monospace;
+      letter-spacing: 0.16em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 26px; height: 2px; background: var(--electric); }
+    h1 {
+      margin: 20px 0 13px;
+      max-width: 560px;
+      font: 700 50px/0.93 "Libre Baskerville", serif;
+      letter-spacing: -0.065em;
+    }
+    h1 em { color: var(--electric); font-weight: 400; }
+    .role {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 15px; letter-spacing: 0.045em;
+    }
+    .status {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 24px;
+      border: 1px solid rgba(139, 196, 185, 0.58); border-radius: 2px;
+      padding: 7px 10px; color: var(--paper); background: rgba(139, 196, 185, 0.13);
+      font: 500 10px/1 "DM Mono", monospace; letter-spacing: 0.09em; text-transform: uppercase;
+    }
+    .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--electric); }
+    .system-card {
+      position: absolute; z-index: 2; right: 48px; bottom: 32px; width: 174px;
+      padding: 13px 14px; border: 1px solid rgba(139, 196, 185, 0.5);
+      background: rgba(6, 76, 92, 0.28); backdrop-filter: blur(4px);
+    }
+    .system-card-label { color: var(--electric); font: 500 8px/1 "DM Mono", monospace; letter-spacing: 0.14em; text-transform: uppercase; }
+    .system-card strong { display: block; margin: 7px 0 8px; font-size: 12px; line-height: 1.25; }
+    .system-card-list { display: flex; flex-wrap: wrap; gap: 5px; }
+    .system-card-list span { color: var(--paper); font: 8px/1 "DM Mono", monospace; opacity: 0.8; }
+    .system-card-list span:not(:last-child)::after { content: "/"; margin-left: 5px; color: var(--electric); }
+
+    .signal-band {
+      display: flex; justify-content: space-between; gap: 14px; align-items: center;
+      padding: 11px 48px; background: var(--signal); color: var(--ink);
+      font: 500 10px/1.2 "DM Mono", monospace; letter-spacing: 0.11em; text-transform: uppercase;
+    }
+    .signal-band span { white-space: nowrap; }
+    .signal-band b { font-size: 15px; line-height: 0; }
+
+    .main { padding: 31px 48px 0; }
+    .intro {
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 38px;
+      padding-bottom: 26px; border-bottom: 1px solid var(--line);
+    }
+    .intro-copy {
+      font: 400 17px/1.55 "Libre Baskerville", serif;
+      color: var(--muted);
+    }
+    .intro-copy strong { color: var(--blue); font-weight: 700; }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; align-content: start; }
+    .fact {
+      position: relative; min-height: 58px; overflow: hidden;
+      border-left: 3px solid var(--blue); padding: 9px 9px 7px 12px;
+      background: linear-gradient(135deg, rgba(139, 196, 185, 0.16), transparent 72%);
+    }
+    .fact::after {
+      content: attr(data-code); position: absolute; right: 7px; top: 6px;
+      color: rgba(27, 107, 122, 0.3); font: 500 8px/1 "DM Mono", monospace; letter-spacing: 0.08em;
+    }
+    .fact b { display: block; color: var(--ink); font-size: 19px; line-height: 1.1; }
+    .fact span { display: block; color: var(--muted); font: 10px/1.35 "DM Mono", monospace; letter-spacing: 0.05em; margin-top: 4px; text-transform: uppercase; }
+
+    .section { padding: 25px 0; border-bottom: 1px solid var(--line); }
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 17px; }
+    .section-title {
+      display: flex; align-items: center; gap: 10px;
+      color: var(--ink); font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .section-title::before {
+      content: attr(data-number); color: var(--blue);
+      font: 500 11px/1 "DM Mono", monospace; letter-spacing: 0;
+    }
+    .section-note { color: var(--muted); font: 10px/1.4 "DM Mono", monospace; text-align: right; }
+    .section-head::after {
+      content: ""; order: 1; flex: 1; height: 4px; min-width: 22px; margin-left: 4px;
+      background: repeating-linear-gradient(90deg, var(--electric) 0 5px, transparent 5px 9px);
+      opacity: 0.78;
+    }
+    .section-note { order: 2; }
+
+    .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+    .skill-card { min-height: 133px; padding: 15px; position: relative; overflow: hidden; background: rgba(242, 247, 246, 0.92); border-top: 3px solid var(--blue); }
+    .skill-card::after {
+      content: ""; position: absolute; right: -18px; bottom: -18px; width: 52px; height: 52px;
+      border: 1px solid rgba(27, 107, 122, 0.22); border-radius: 50%;
+    }
+    .skill-card::before {
+      content: attr(data-code); position: absolute; right: 13px; top: 12px;
+      color: rgba(27, 107, 122, 0.38); font: 500 9px/1 "DM Mono", monospace; letter-spacing: 0.08em;
+    }
+    .skill-card:nth-child(2) { border-color: var(--electric); }
+    .skill-card:nth-child(3) { border-color: var(--electric); }
+    .skill-card h3 { color: var(--ink); font-size: 14px; margin-bottom: 9px; }
+    .skill-card p { color: var(--muted); font-size: 11px; line-height: 1.55; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      padding: 5px 7px; border: 1px solid var(--line); background: rgba(242, 247, 246, 0.82);
+      color: var(--muted); font: 10px/1 "DM Mono", monospace;
+    }
+    .tag.core { background: var(--ink); border-color: var(--ink); color: var(--electric); }
+
+    .delivery-rail { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
+    .delivery-step {
+      min-height: 96px; padding: 12px 11px; position: relative;
+      background: rgba(139, 196, 185, 0.14); border: 1px solid rgba(27, 107, 122, 0.18);
+    }
+    .delivery-step::before {
+      content: ""; position: absolute; top: 0; left: 0; width: 18px; height: 3px; background: var(--electric);
+    }
+    .delivery-step:not(:last-child)::after {
+      content: ""; position: absolute; top: 22px; right: -9px; width: 9px; height: 1px;
+      background: var(--blue);
+    }
+    .delivery-num { color: var(--blue); font: 500 10px/1 "DM Mono", monospace; }
+    .delivery-step h3 { margin: 16px 0 5px; color: var(--ink); font-size: 12px; line-height: 1.15; }
+    .delivery-step p { color: var(--muted); font-size: 10px; line-height: 1.45; }
+
+    .project-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 14px; }
+    .project-main {
+      padding: 19px 20px; background: linear-gradient(135deg, #0f4c5c 0%, #1b6b7a 100%); color: white;
+      border-left: 4px solid var(--signal);
+    }
+    .project-kicker {
+      color: var(--signal); font: 500 10px/1 "DM Mono", monospace;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .project-main h3 { margin: 8px 0 9px; font: 700 21px/1.15 "Libre Baskerville", serif; }
+    .project-main p { max-width: 440px; color: rgba(255, 255, 255, 0.76); font-size: 11px; line-height: 1.62; }
+    .project-points {
+      display: grid; gap: 10px; padding: 17px; position: relative; overflow: hidden; background: rgba(139, 196, 185, 0.22);
+      border-top: 3px solid var(--blue);
+    }
+    .project-points::after {
+      content: "QR"; position: absolute; right: -7px; bottom: -18px; color: transparent;
+      font: 700 70px/1 "Space Grotesk", sans-serif; letter-spacing: -0.12em;
+      -webkit-text-stroke: 1px rgba(15, 76, 92, 0.13);
+    }
+    .project-point { position: relative; z-index: 1; }
+    .project-point { padding-left: 11px; border-left: 2px solid var(--signal); }
+    .project-point b { display: block; color: var(--ink); font-size: 11px; }
+    .project-point span { display: block; margin-top: 3px; color: var(--muted); font: 9px/1.4 "DM Mono", monospace; }
+
+    .track { display: grid; grid-template-columns: 88px 1fr; gap: 17px; align-items: start; }
+    .track-year { color: var(--blue); font: 500 11px/1.4 "DM Mono", monospace; }
+    .track-items { border-left: 1px solid var(--line); padding-left: 18px; position: relative; }
+    .track-items::before {
+      content: ""; position: absolute; width: 9px; height: 9px; left: -5px; top: 3px;
+      background: var(--signal); border: 2px solid var(--paper); border-radius: 50%;
+    }
+    .track-role { color: var(--ink); font-size: 14px; font-weight: 700; }
+    .track-company { color: var(--blue); font-size: 12px; margin: 2px 0 7px; }
+    .track-desc { color: var(--muted); font-size: 11px; line-height: 1.55; }
+    .work-list { display: grid; gap: 17px; }
+
+    .applications { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 17px; }
+    .applications > div { padding: 18px; background: rgba(139, 196, 185, 0.22); }
+    .applications h3 { color: var(--ink); font-size: 13px; margin-bottom: 9px; }
+    .applications p { color: var(--muted); font-size: 11px; line-height: 1.6; }
+    .award { background: linear-gradient(135deg, #1b6b7a 0%, #0f4c5c 100%) !important; }
+    .award h3, .award p { color: white; }
+    .award p { color: rgba(255, 255, 255, 0.79); }
+
+    .footer {
+      position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr auto;
+      gap: 24px; align-items: center; padding: 28px 48px; background: linear-gradient(135deg, #0f4c5c 0%, #1b6b7a 100%); color: white;
+    }
+    .footer::after {
+      content: ""; position: absolute; width: 240px; height: 240px; right: -82px; top: -90px;
+      border: 1px solid rgba(139, 196, 185, 0.4); border-radius: 50%;
+    }
+    .footer::before {
+      content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px;
+      background: repeating-linear-gradient(90deg, var(--electric) 0 20px, transparent 20px 27px);
+    }
+    .footer-code {
+      position: absolute; z-index: 1; right: 48px; bottom: 11px;
+      color: rgba(242, 247, 246, 0.42); font: 8px/1 "DM Mono", monospace; letter-spacing: 0.15em;
+    }
+    .footer-copy, .contact { position: relative; z-index: 1; }
+    .footer-label { color: var(--signal); font: 500 10px/1 "DM Mono", monospace; letter-spacing: 0.13em; text-transform: uppercase; }
+    .footer h2 { margin-top: 8px; font: 400 20px/1.25 "Libre Baskerville", serif; }
+    .contact { display: grid; gap: 7px; text-align: right; color: var(--paper); font: 10px/1.3 "DM Mono", monospace; }
+    .contact a { color: inherit; text-decoration: none; }
+
+    .controls { position: fixed; right: 22px; bottom: 22px; z-index: 5; }
+    button { border: 0; padding: 11px 15px; background: var(--signal); color: var(--ink); cursor: pointer; font: 600 12px/1 "Space Grotesk", sans-serif; box-shadow: 0 6px 22px rgba(0, 0, 0, 0.28); }
+    @media print {
+      body { padding: 0; background: white; }
+      .poster { width: 100%; box-shadow: none; }
+      .controls { display: none; }
+    }
+    @media (max-width: 650px) {
+      body { padding: 0; }
+      .hero, .main, .footer { padding-left: 24px; padding-right: 24px; }
+      .signal-band { padding: 11px 24px; overflow: hidden; }
+      .signal-band span:last-child { display: none; }
+      h1 { font-size: 37px; }
+      .intro, .applications, .project-grid, .delivery-rail { grid-template-columns: 1fr; gap: 12px; }
+      .skills { grid-template-columns: 1fr; }
+      .delivery-step { min-height: 0; }
+      .delivery-step:not(:last-child)::after { top: auto; right: auto; bottom: -12px; left: 22px; width: 1px; height: 12px; }
+      .system-card { position: relative; right: auto; bottom: auto; width: 100%; margin-top: 20px; }
+      .facts { grid-template-columns: repeat(2, 1fr); }
+      .footer { grid-template-columns: 1fr; }
+      .contact { text-align: left; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .section-head::after { width: 100%; flex: none; margin-left: 0; }
+      .section-note { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <main class="poster">
+    <header class="hero">
+      <div class="wire"></div>
+      <svg class="circuit-lines" viewBox="0 0 420 220" aria-hidden="true">
+        <path d="M42 210 V152 H145 V105 H220 V58 H390" />
+        <path d="M0 171 H92 V126 H175 V172 H285 V132 H420" />
+        <path d="M164 220 V186 H240 V205 H331 V163 H390" />
+        <circle cx="145" cy="152" r="4" /><circle cx="220" cy="105" r="4" />
+        <circle cx="175" cy="126" r="4" /><circle cx="285" cy="172" r="4" />
+        <circle cx="331" cy="205" r="4" />
+      </svg>
+      <div class="hero-content">
+        <div class="eyebrow">Controls and automation</div>
+        <h1>Raghavendra<br><em>Pokuri</em></h1>
+        <p class="role">Controls Systems Engineer | PLC | SCADA/HMI | Industrial Networks</p>
+        <div class="status">Open to opportunities in Canada</div>
+      </div>
+      <aside class="system-card">
+        <p class="system-card-label">System scope</p>
+        <strong>From sequence to site readiness</strong>
+        <div class="system-card-list"><span>PLC</span><span>HMI</span><span>Motion</span><span>Safety</span></div>
+      </aside>
+    </header>
+
+    <div class="signal-band">
+      <span>Toronto, Ontario</span><b>+</b>
+      <span>Contract or permanent roles</span><b>+</b>
+      <span>Available in 3-4 weeks</span>
+    </div>
+
+    <div class="main">
+      <section class="intro">
+        <p class="intro-copy">Controls specialist with <strong>10+ years</strong> turning machine sequences into reliable, production-ready automation - from electrical design and PLC logic to commissioning, service and team leadership.</p>
+        <div class="facts">
+          <div class="fact" data-code="A1"><b>10+ yrs</b><span>Automation delivery</span></div>
+          <div class="fact" data-code="A2"><b>UL / CE</b><span>Machine standards</span></div>
+          <div class="fact" data-code="A3"><b>FAT / SAT</b><span>Validation &amp; launch</span></div>
+          <div class="fact" data-code="A4"><b>Remote + Site</b><span>Customer support</span></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title" data-number="01">Core capabilities</h2>
+          <p class="section-note">Design, program, commission, improve</p>
+        </div>
+        <div class="skills">
+          <article class="skill-card" data-code="CTRL.01">
+            <h3>PLC + Motion</h3>
+            <p>Bosch Rexroth, B&amp;R, CODESYS, Siemens, Allen Bradley, Mitsubishi, Omron, Beckhoff, servo and VFD systems.</p>
+          </article>
+          <article class="skill-card" data-code="CTRL.02">
+            <h3>HMI + SCADA</h3>
+            <p>WinStudio, WinCC, B&amp;R, Siemens, Allen Bradley, Pro-face, Delta, Omron and production data logging.</p>
+          </article>
+          <article class="skill-card" data-code="CTRL.03">
+            <h3>Industrial Networks</h3>
+            <p>Modbus RTU, TCP/IP, Sercos, Profinet, Profibus, EtherCAT, EtherNet/IP and OPC UA / DA.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title" data-number="02">Technical toolkit</h2>
+          <p class="section-note">Core technologies and delivery skills</p>
+        </div>
+        <div class="tags">
+          <span class="tag core">Structured Text</span><span class="tag core">Ladder Logic</span><span class="tag core">PackML</span>
+          <span class="tag core">Electrical Design</span><span class="tag">SCADA</span><span class="tag">Safety PLC</span>
+          <span class="tag">Python (basic)</span><span class="tag">Function Blocks</span><span class="tag">Panel Design</span>
+          <span class="tag">FAT / SAT</span><span class="tag">Team Leadership</span><span class="tag">Training</span>
+          <span class="tag">Presales Support</span><span class="tag">GitHub / Jira</span><span class="tag">SQL Data Logging</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title" data-number="03">Featured project</h2>
+          <p class="section-note">Applied Python and web development</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-main">
+            <p class="project-kicker">Excel QR Viewer</p>
+            <h3>Spreadsheet data made mobile-ready.</h3>
+            <p>Built a FastAPI application that turns uploaded Excel workbooks into secure, QR-addressable worksheet views with responsive tables, search and filtering for desktop or mobile users.</p>
+          </article>
+          <div class="project-points">
+            <div class="project-point"><b>Workbook ingestion</b><span>Multi-sheet Pandas + OpenPyXL processing</span></div>
+            <div class="project-point"><b>QR delivery</b><span>Unique public URL and QR code per worksheet</span></div>
+            <div class="project-point"><b>Production-ready</b><span>Validation, error handling and Pytest smoke tests</span></div>
+          </div>
+        </div>
+        <div class="tags" style="margin-top: 13px;">
+          <span class="tag core">Python</span><span class="tag core">FastAPI</span><span class="tag">Pandas</span>
+          <span class="tag">OpenPyXL</span><span class="tag">QRCode</span><span class="tag">Jinja2</span>
+          <span class="tag">JavaScript</span><span class="tag">Pytest</span><span class="tag">Uvicorn</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title" data-number="04">Delivery approach</h2>
+          <p class="section-note">A controls workflow built for reliable launches</p>
+        </div>
+        <div class="delivery-rail">
+          <article class="delivery-step">
+            <p class="delivery-num">01</p>
+            <h3>Define</h3>
+            <p>Translate the machine sequence and requirements.</p>
+          </article>
+          <article class="delivery-step">
+            <p class="delivery-num">02</p>
+            <h3>Build</h3>
+            <p>Develop control logic, panels and interfaces.</p>
+          </article>
+          <article class="delivery-step">
+            <p class="delivery-num">03</p>
+            <h3>Validate</h3>
+            <p>Test I/O, motion, safety and machine behavior.</p>
+          </article>
+          <article class="delivery-step">
+            <p class="delivery-num">04</p>
+            <h3>Launch</h3>
+            <p>Commission, support and optimize at the site.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title" data-number="05">Selected experience</h2>
+          <p class="section-note">India and remote support for global customers</p>
+        </div>
+        <div class="work-list">
+          <div class="track">
+            <div class="track-year">2026<br>REMOTE</div>
+            <div class="track-items">
+              <h3 class="track-role">External Consultant, Controls Systems</h3>
+              <p class="track-company">Nilpeter India Pvt Ltd</p>
+              <p class="track-desc">Remote technical support, PLC sequence changes, safety start-up guidance and job trials for flexographic label printing machines in Central America.</p>
+            </div>
+          </div>
+          <div class="track">
+            <div class="track-year">2023 - 2025</div>
+            <div class="track-items">
+              <h3 class="track-role">Assistant Manager, Control Systems</h3>
+              <p class="track-company">Nilpeter India Pvt Ltd</p>
+              <p class="track-desc">Built, commissioned and optimized controls for flexographic printing machines; led electrical design, compliance and UL / CE safety-programming work.</p>
+            </div>
+          </div>
+          <div class="track">
+            <div class="track-year">2014 - 2023</div>
+            <div class="track-items">
+              <h3 class="track-role">Application Executive / Assistant Manager, TEF</h3>
+              <p class="track-company">Bosch Rexroth India + SEG Automotive</p>
+              <p class="track-desc">Delivered automation, motion control and test systems across packaging, welding, automotive, food, pharma and industrial machinery.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title" data-number="06">Proven on the floor</h2>
+          <p class="section-note">High-accuracy automation applications</p>
+        </div>
+        <div class="applications">
+          <div>
+            <h3>Machines and applications</h3>
+            <p>Flexographic label printing, VFFS packaging, auger filling, EV battery welding, test benches, laser marking, granite polishing, sheet loading, poka-yoke and CNC automation.</p>
+          </div>
+          <div class="award">
+            <h3>Recognized for support</h3>
+            <p>Excellent Customer Support award at Bosch Rexroth, with rapid remote and on-site service across time zones.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-copy">
+        <p class="footer-label">Let's make the machine perform</p>
+        <h2>Open to controls and automation roles across Ontario.</h2>
+      </div>
+      <span class="footer-code">PROFILE // RPK-2026</span>
+      <address class="contact">
+        <a href="mailto:raghavendra.pokuri@gmail.com">raghavendra.pokuri@gmail.com</a>
+        <a href="tel:+14374460436">+1 437-446-0436</a>
+        <a href="https://www.linkedin.com/in/raghavendra-pokuri">linkedin.com/in/raghavendra-pokuri</a>
+      </address>
+    </footer>
+  </main>
+  <div class="controls"><button type="button" onclick="window.print()">Save as PDF</button></div>
+</body>
+</html>
